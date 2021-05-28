@@ -10,19 +10,29 @@ var weatherSearch = function(event) {
     fetch(
         "http://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=71caaa193e9262e0eb4c901abdadf9c8&units=metric"
     ).then(function(response) {
-        response.json().then(function(data) {
-            var lat = data.coord.lat;
-            var lon = data.coord.lon;
-            fetch(
-                "https://api.openweathermap.org/data/2.5/onecall?lat="+lat+"&lon="+lon+"&exclude=minutely,hourly,alerts&appid=71caaa193e9262e0eb4c901abdadf9c8&units=metric"
-            ).then(function(response) {
-                response.json().then(function(data) {
-                    console.log(data);
-                    currentWeather(data);
-                    weatherForecast(data);
+        if (response.ok) {
+            response.json().then(function(data) {
+                var lat = data.coord.lat;
+                var lon = data.coord.lon;
+                fetch(
+                    "https://api.openweathermap.org/data/2.5/onecall?lat="+lat+"&lon="+lon+"&exclude=minutely,hourly,alerts&appid=71caaa193e9262e0eb4c901abdadf9c8&units=metric"
+                ).then(function(response) {
+                    if (response.ok) {
+                        response.json().then(function(data) {
+                            console.log(data);
+                            currentWeather(data);
+                            weatherForecast(data);
+                        })   
+                    }
+                    else {
+                        console.log("City not found. Please try again")
+                    }
                 })
             })
-        })
+        }
+        else {
+            console.log("City not found. Please try again")
+        }
     })
     /*fetch(
         "http://api.openweathermap.org/data/2.5/forecast?q="+city+"&appid=71caaa193e9262e0eb4c901abdadf9c8&units=metric"
