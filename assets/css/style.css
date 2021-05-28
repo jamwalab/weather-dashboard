@@ -31,3 +31,8 @@
     font-size: 16px;
     background-color: rgb(82, 148, 209);    
 }
+
+.search-history button {
+    background-color: rgb(185, 184, 184);
+    color: black;
+}
