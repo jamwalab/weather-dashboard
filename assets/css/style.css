@@ -48,11 +48,23 @@
 }
 
 .weatherDetails {
-    font-size: 18px;
+    font-size: 22px;
     color: rgb(56, 56, 56);
 }
 
 .warning {
     font-size: 26px;
     color: red;
+}
+
+.badgeYellow {
+    background-color: yellow;
+}
+
+.badgeOrange {
+    background-color: orange;
+}
+
+.badgeViolet {
+    background-color: violet;
 }
