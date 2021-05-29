@@ -14,11 +14,7 @@ var warning = function() {
     currentWeather.classList.add("warning");
 }
 
-var weatherSearch = function(event) {
-    event.preventDefault();
-    var city = searchInput.value;
-    searchInput.value = "";
-    console.log(city);
+var fetchMe = function(city) {
     fetch(
         "http://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=71caaa193e9262e0eb4c901abdadf9c8&units=metric"
     ).then(function(response) {
@@ -52,6 +48,44 @@ var weatherSearch = function(event) {
     })
 }
 
+var weatherSearch = function(event) {
+    event.preventDefault();
+    var city = searchInput.value;
+    searchInput.value = "";
+    fetchMe(city);
+    /*fetch(
+        "http://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=71caaa193e9262e0eb4c901abdadf9c8&units=metric"
+    ).then(function(response) {
+        if (response.ok) {
+            response.json().then(function(data) {
+                console.log(data)
+                var lat = data.coord.lat;
+                var lon = data.coord.lon;
+                var cityName = data.name + ", " + data.sys.country;
+                fetch(
+                    "https://api.openweathermap.org/data/2.5/onecall?lat="+lat+"&lon="+lon+"&exclude=minutely,hourly,alerts&appid=71caaa193e9262e0eb4c901abdadf9c8&units=metric"
+                ).then(function(response) {
+                    if (response.ok) {
+                        response.json().then(function(data) {
+                            console.log(data);
+                            currentDisplay(data, cityName);
+                            weatherForecast(data);
+                            saveSearch(city);
+                            loadButtons();
+                        })   
+                    }
+                    else {
+                        warning();
+                    }
+                })
+            })
+        }
+        else {
+            warning();
+        }
+    })*/
+}
+
 var currentDisplay = function(data, city) {
     var date = moment((data.current.dt)*1000).format("YYYY-MM-DD");
     var icon = "http://openweathermap.org/img/w/"+data.current.weather[0].icon+".png";
@@ -60,7 +94,7 @@ var currentDisplay = function(data, city) {
     wind = (parseFloat(wind) * 3.6).toFixed(2);
     var humidity = data.current.humidity;
     var uvi = parseFloat(data.current.uvi);
-    console.log(date,icon,temp,wind,humidity,uvi);
+    //console.log(date,icon,temp,wind,humidity,uvi);
 
     currentWeather.textContent = "";
     currentWeather.classList.remove("warning");
@@ -106,7 +140,7 @@ var weatherForecast = function(data) {
         wind = (parseFloat(wind) * 3.6).toFixed(2);
         var humidity = data.daily[i].humidity;
         var uvi = data.daily[i].uvi;
-        console.log(date,icon,temp,wind,humidity,uvi);
+        //console.log(date,icon,temp,wind,humidity,uvi);
 
         if (date > dateToday && counter <5) {
             var dayDisplay = document.createElement("article");
@@ -141,4 +175,13 @@ var loadButtons = function() {
     }
 }
 
+var clickHandler = function(event) {
+    var city = event.target.textContent;
+    fetchMe(city);
+}
+
 searchBox.addEventListener("submit", weatherSearch);
+
+historyDisplay.addEventListener("click", clickHandler);
+
+window.addEventListener("load", loadButtons);
