@@ -20,7 +20,7 @@ var warning = function() {
 var fetchMe = function(city) {
     fetch(
         //-----API TO SEARCH WITH CITY NAME AS INPUT (NO UV INDEX IN THIS API)-----//
-        "http://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=71caaa193e9262e0eb4c901abdadf9c8&units=metric"
+        "https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=71caaa193e9262e0eb4c901abdadf9c8&units=metric"
     ).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
