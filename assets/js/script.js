@@ -2,6 +2,8 @@ var searchBox = document.querySelector(".search-input");
 var searchInput = document.querySelector("#searchCity");
 var currentWeather = document.querySelector("#current-weather");
 var forecast = document.querySelector(".forecast");
+var historyDisplay = document.querySelector("#search-history");
+var searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
 var dateToday = moment().format("YYYY-MM-DD");
 console.log(dateToday);
 
@@ -34,6 +36,8 @@ var weatherSearch = function(event) {
                             console.log(data);
                             currentDisplay(data, cityName);
                             weatherForecast(data);
+                            saveSearch(city);
+                            loadButtons();
                         })   
                     }
                     else {
@@ -46,20 +50,6 @@ var weatherSearch = function(event) {
             warning();
         }
     })
-    /*fetch(
-        "http://api.openweathermap.org/data/2.5/forecast?q="+city+"&appid=71caaa193e9262e0eb4c901abdadf9c8&units=metric"
-    ).then(function(response) {
-        response.json().then(function(data) {
-            console.log(data);
-        })
-    })
-    fetch(
-        "https://api.openweathermap.org/data/2.5/onecall?lat=43.7001&lon=-79.4163&exclude=minutely,hourly,alerts&appid=71caaa193e9262e0eb4c901abdadf9c8&units=metric"
-    ).then(function(response) {
-        response.json().then(function(data) {
-            console.log(data);
-        })
-    })*/
 }
 
 var currentDisplay = function(data, city) {
@@ -129,4 +119,26 @@ var weatherForecast = function(data) {
     forecast.appendChild(forecastHead);
     forecast.appendChild(forecastSection);
 }
+
+var saveSearch = function(city) {
+    if (!city) {
+        return;
+    } else if (!(searchHistory.includes(city))) {
+        searchHistory.splice(0,0,city);
+        localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+    }
+}
+
+var loadButtons = function() {
+    historyDisplay.textContent = ""
+    searchHistory.splice(8,1000);
+    console.log(searchHistory);
+    for (var i=0; i<searchHistory.length; i++) {
+        var btn = document.createElement("button");
+        btn.className = "btn btn-secondary text-center my-2";
+        btn.textContent = searchHistory[i];
+        historyDisplay.appendChild(btn);
+    }
+}
+
 searchBox.addEventListener("submit", weatherSearch);
