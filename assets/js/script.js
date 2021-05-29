@@ -67,7 +67,7 @@ var currentDisplay = function(data, city) {
     var icon = "http://openweathermap.org/img/w/"+data.current.weather[0].icon+".png";
     var temp = data.current.temp;
     var wind = data.current.wind_speed;
-    wind = (parseFloat(wind) * 3.6);
+    wind = (parseFloat(wind) * 3.6).toFixed(2);
     var humidity = data.current.humidity;
     var uvi = parseFloat(data.current.uvi);
     console.log(date,icon,temp,wind,humidity,uvi);
@@ -113,6 +113,7 @@ var weatherForecast = function(data) {
         var icon = "http://openweathermap.org/img/w/"+data.daily[i].weather[0].icon+".png";
         var temp = data.daily[i].temp.max;
         var wind = data.daily[i].wind_speed;
+        wind = (parseFloat(wind) * 3.6).toFixed(2);
         var humidity = data.daily[i].humidity;
         var uvi = data.daily[i].uvi;
         console.log(date,icon,temp,wind,humidity,uvi);
