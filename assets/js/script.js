@@ -113,7 +113,7 @@ var weatherForecast = function(data) {
     forecastHead.textContent = "5-Day Forecast:";
     //-----5 DAY FORECAST SECTION-----//
     var forecastSection = document.createElement("div");
-    forecastSection.className = "d-flex justify-content-between";
+    forecastSection.className = "d-flex forecastFlex";
     //-----LOOP TO DISPLAY 5 DAYS WEATHER-----//
     for (var i=0; i<data.daily.length; i++) {
         var date = moment((data.daily[i].dt)*1000).format("YYYY-MM-DD");
@@ -128,7 +128,7 @@ var weatherForecast = function(data) {
         //-----DATA DISPLAYED ONLY WHEN DATES GREATER THAN CURRENT DATE UP TO 5-----//
         if (date > dateToday && counter <5) {
             var dayDisplay = document.createElement("article");
-            dayDisplay.className = "dayDisplay"
+            dayDisplay.className = "dayDisplay m-1"
             dayDisplay.innerHTML = "<p>"+date+"</p><div><img src='"+icon+"' alt='icon'/></div><p>Temp: "+temp+"°C</p><p>Wind: "+wind+" KPH</p><p>Humidity: "+humidity+" %</p>";
             counter++;
             forecastSection.appendChild(dayDisplay);
