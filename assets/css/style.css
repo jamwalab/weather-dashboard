@@ -1,5 +1,5 @@
 .body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto Slab', serif;
 }
 
 .page-header {
@@ -29,10 +29,30 @@
 
 .search-input button {
     font-size: 16px;
-    background-color: rgb(82, 148, 209);    
+    background-color: rgb(82, 148, 209);
+    box-shadow: 0 0 2px rgb(160, 160, 160);   
+}
+
+.search-input button:focus {
+    box-shadow: none;    
 }
 
 .search-history button {
     background-color: rgb(185, 184, 184);
     color: black;
+    box-shadow: 0 0 2px rgb(160, 160, 160);
+}
+
+.search-history button:focus {
+    box-shadow: none;
+}
+
+.weatherDetails {
+    font-size: 18px;
+    color: rgb(56, 56, 56);
+}
+
+.warning {
+    font-size: 26px;
+    color: red;
 }
