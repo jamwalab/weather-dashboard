@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--BOOTSTRAP-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <!--GOOGLE FONTS-->
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Weather Dashboard</title>
@@ -15,7 +17,9 @@
     </header>
 
     <div class="row">
+        <!--LEFT SEARCH SECTION-->
         <div class="col-3 d-flex flex-column">
+            <!--SEARCH INPUT BOX-->
             <section class="ml-2">
                 <h2 class="my-2">Search for a City</h2>
                 <form class="d-flex flex-column search-input pb-2">
@@ -23,27 +27,21 @@
                     <button class="btn btn-primary text-center my-2" type="submit">Search</button>
                 </form>
             </section>
+            <!--SEARCH HISTORY-->
             <section id="search-history" class="pt-2 ml-2 d-flex flex-column search-history">
-                <!--<button class="btn btn-secondary text-center my-2">Search</button>
-                <button class="btn btn-secondary text-center my-2">Search</button>-->
             </section>
         </div>
+        <!--RIGHT DISPLAY SECTION-->
         <div class="col-9 d-flex flex-column mt-3">
+            <!--CURRENT WEATHER DISPLAY SECTION-->
             <section id="current-weather" class="mr-3">
-                <!--<h2 class="m-2">
-                    <span class="currentCity"></span>
-                    <span class="dateToday"></span>
-                    <span class="weatherIcon"></span>
-                </h2>
-                <article class="m-2 weatherDetails">
-
-                </article>-->
             </section>
+            <!--FORECAST WEATHER DISPLAY SECTION-->
             <section class="forecast mr-3">
-
             </section>
         </div>
     </div>
+    <!--MOMENT.JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
