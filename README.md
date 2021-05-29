@@ -3,7 +3,7 @@
 ### Built with HTML, CSS, JAVASCRIPT, BOOTSTRAP AND MOMENT
 ### [Link to "Weather Dashboard" page](https://jamwalab.github.io/weather-dashboard/)
 
-![Preview](./assets/img/preview1.png)
+![Preview](./assets/img/preview1.PNG)
 
 ### Project description
 * Weather dashboard allows to search weather by city.
