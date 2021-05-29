@@ -8,6 +8,7 @@ console.log(dateToday);
 var warning = function() {
     currentWeather.classList.remove("border","border-dark");
     currentWeather.textContent = "City not found, please try again!!";
+    forecast.textContent = "";
     currentWeather.classList.add("warning");
 }
 
@@ -101,8 +102,12 @@ var currentDisplay = function(data, city) {
 
 var weatherForecast = function(data) {
     var counter = 0;
+    forecast.textContent = "";
     var forecastHead = document.createElement("h2");
+    forecastHead.className = "forecastHead my-3";
     forecastHead.textContent = "5-Day Forecast:";
+    var forecastSection = document.createElement("div");
+    forecastSection.className = "d-flex justify-content-between";
     for (var i=0; i<data.daily.length; i++) {
         var date = moment((data.daily[i].dt)*1000).format("YYYY-MM-DD");
         var icon = "http://openweathermap.org/img/w/"+data.daily[i].weather[0].icon+".png";
@@ -113,10 +118,14 @@ var weatherForecast = function(data) {
         console.log(date,icon,temp,wind,humidity,uvi);
 
         if (date > dateToday && counter <5) {
-            console.log(counter);
+            var dayDisplay = document.createElement("article");
+            dayDisplay.className = "dayDisplay"
+            dayDisplay.innerHTML = "<p>"+date+"</p><div><img src='"+icon+"' alt='icon'/></div><p>Temp: "+temp+"°C</p><p>Wind: "+wind+" KPH</p><p>Humidity: "+humidity+" %</p>";
             counter++;
+            forecastSection.appendChild(dayDisplay);
         }
     }
-    
+    forecast.appendChild(forecastHead);
+    forecast.appendChild(forecastSection);
 }
 searchBox.addEventListener("submit", weatherSearch);
